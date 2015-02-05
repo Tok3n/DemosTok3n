@@ -1,0 +1,29 @@
+runtime: go
+api_version: go1
+application: demostok3n
+version: 1
+module: default
+
+
+inbound_services:
+- warmup
+
+automatic_scaling:
+  min_idle_instances: 1
+  max_idle_instances: 1
+  min_pending_latency: 1.0s
+
+handlers:
+- url: /
+  script: _go_app
+
+- url: /ws/.*
+  script: _go_app
+
+
+
+- url: /web/
+  static_dir: DemosTok3n/web
+- url: /build/
+  static_dir: DemosTok3n/build/web
+  
